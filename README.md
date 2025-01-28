@@ -6,9 +6,11 @@
   <a href="https://github.com/hagelstam/cryptochimp/actions">
     <img src="https://github.com/hagelstam/cryptochimp/actions/workflows/tests.yml/badge.svg" alt="actions" />
   </a>
+  &nbsp;
   <a href="https://github.com/hagelstam/cryptochimp/commits/main">
     <img src="https://img.shields.io/github/last-commit/hagelstam/cryptochimp" alt="last commit" />
   </a>
+  &nbsp;
   <a href="https://github.com/hagelstam/cryptochimp/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/hagelstam/cryptochimp.svg" alt="license" />
   </a>
@@ -34,13 +36,13 @@ Create a `.env` file and fill it out as per `.env.example`:
 cp .env.example .env
 ```
 
-Run a local CockroachDB instance with Docker:
+Run a CockroachDB instance with Docker:
 
 ```bash
 pnpm db:up
 ```
 
-Create the database tables:
+Run database migrations:
 
 ```bash
 pnpm db:push
