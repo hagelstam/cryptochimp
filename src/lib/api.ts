@@ -25,8 +25,7 @@ export const getTopCoins = unstable_cache(
         volume24h: coin.quote.EUR.volume_24h,
         circulatingSupply: coin.circulating_supply,
         metadata: {
-          logo: coinMetadata.logo,
-          urls: coinMetadata.urls,
+          logo: coinMetadata?.logo,
         },
       };
     });

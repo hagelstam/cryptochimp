@@ -20,12 +20,7 @@ export type OwnedCoin = {
 };
 
 export type CoinMetadata = {
-  logo: string;
-  urls: {
-    website: string[];
-    reddit: string[];
-    source_code: string[];
-  };
+  logo?: string;
 };
 
 export type Coin = {

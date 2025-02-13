@@ -42,12 +42,14 @@ export const TopCoinsTable = async () => {
             <TableRow key={coin.name}>
               <TableCell>{coin.rank}</TableCell>
               <TableCell className="flex flex-row items-center gap-2">
-                <Image
-                  alt="logo"
-                  height={24}
-                  width={24}
-                  src={coin.metadata.logo}
-                />
+                {coin.metadata?.logo && (
+                  <Image
+                    alt="logo"
+                    height={24}
+                    width={24}
+                    src={coin.metadata.logo}
+                  />
+                )}
                 <span>{`${coin.name} ${coin.symbol}`}</span>
               </TableCell>
               <TableCell className="text-right">
