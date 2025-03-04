@@ -1,13 +1,15 @@
 name: Tests
-
 on:
   pull_request:
+    branches: ["*"]
+  push:
     branches: ["*"]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    name: test
+    name: Build, lint and test
+    runs-on: ubuntu-24.04
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,19 +18,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 9.6.0
+          version: 10.5.2
           run_install: false
 
       - name: Get pnpm store directory
         id: pnpm-cache
         run: |
           echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
@@ -36,10 +39,19 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm format:check
-      - run: pnpm test
+      - name: Static analysis
+        run: |
+          pnpm lint &
+          pnpm typecheck &
+          pnpm format:check &
+          wait
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
