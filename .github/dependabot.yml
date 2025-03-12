@@ -5,9 +5,10 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      npm:
-        patterns:
-          - "*"
+      minor:
+        update-types:
+          - minor
+          - patch
 
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
