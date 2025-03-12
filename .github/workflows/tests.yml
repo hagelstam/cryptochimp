@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Build, lint and test
+    name: Lint, build and test
     runs-on: ubuntu-24.04
 
     steps:
@@ -15,17 +15,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.5.2
+          version: 10.6.2
           run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          cache: pnpm
 
       - name: Get pnpm store directory
         id: pnpm-cache
