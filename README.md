@@ -19,7 +19,7 @@
 ### 📷 Demo
 
 <a href="https://cryptochimp.vercel.app/">
-  <img src="screenshot.png" alt="screenshot" width="800"/>
+  <img src="./src/app/opengraph-image.png" alt="screenshot" width="800"/>
 </a>
 
 ### ⚙️ Getting started
