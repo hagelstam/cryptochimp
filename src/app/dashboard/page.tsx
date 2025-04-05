@@ -1,51 +1,52 @@
-import { CapitalChart } from "@/components/CapitalChart";
+import { ChartRow } from "@/components/ChartRow";
 import { HoldingsTable } from "@/components/HoldingsTable";
-import { IndicatorCard } from "@/components/IndicatorCard";
-import { PortfolioChart } from "@/components/PortfolioChart";
-import { getDashboardData } from "@/lib/api";
+import { IndicatorRow } from "@/components/IndicatorRow";
+import { Skeleton } from "@/components/Skeleton";
 import { getCurrentUser } from "@/lib/auth";
-import { INITIAL_CAPITAL, LOGIN_URL } from "@/lib/constants";
+import { LOGIN_URL } from "@/lib/constants";
 import { Col, Grid } from "@tremor/react";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function Dashboard() {
   const user = await getCurrentUser();
   if (!user) {
     redirect(LOGIN_URL);
   }
-  const data = await getDashboardData(user.id);
 
   return (
     <>
-      <Grid numItemsSm={3} className="gap-6">
-        <IndicatorCard
-          title="Portfolio value"
-          value={data.capital.value}
-          percentage={data.capital.percentageChange}
-          from={INITIAL_CAPITAL}
-        />
-        <IndicatorCard
-          title="Portfolio value 24h"
-          value={data.capitalToday.value}
-          percentage={data.capitalToday.percentageChange}
-        />
-        <IndicatorCard title="Cash balance" value={data.balance} />
-      </Grid>
+      <Suspense
+        fallback={
+          <Grid numItemsSm={3} className="gap-6">
+            <Skeleton className="h-[112px] w-full" />
+            <Skeleton className="h-[112px] w-full" />
+            <Skeleton className="h-[112px] w-full" />
+          </Grid>
+        }
+      >
+        <IndicatorRow userId={user.id} />
+      </Suspense>
       <div className="mt-6">
-        <Grid numItemsLg={6} className="mt-6 gap-6">
-          <Col numColSpanLg={4}>
-            <CapitalChart chartData={data.capitalDataPoints} />
-          </Col>
-          <Col numColSpanLg={2}>
-            <PortfolioChart
-              chartData={data.ownedCoins}
-              portfolioValue={data.coinCapitalValue}
-            />
-          </Col>
-        </Grid>
+        <Suspense
+          fallback={
+            <Grid numItemsLg={6} className="mt-6 gap-6">
+              <Col numColSpanLg={4}>
+                <Skeleton className="h-[388px] w-full" />
+              </Col>
+              <Col numColSpanLg={2}>
+                <Skeleton className="size-full" />
+              </Col>
+            </Grid>
+          }
+        >
+          <ChartRow userId={user.id} />
+        </Suspense>
       </div>
       <div className="mt-6">
-        <HoldingsTable ownedCoins={data.ownedCoins} />
+        <Suspense fallback={<Skeleton className="h-[340px] w-full" />}>
+          <HoldingsTable userId={user.id} />
+        </Suspense>
       </div>
     </>
   );

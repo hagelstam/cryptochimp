@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
       { hostname: "upload.wikimedia.org" },
     ],
   },
+  experimental: {
+    useCache: true,
+  },
 };
 
 export default nextConfig;

@@ -3,36 +3,32 @@ import { getLatest, getMetadata, getPrice, getWallet } from "@/lib/crypto";
 import { prisma } from "@/lib/db";
 import { Coin, DashboardData, TradeDetails } from "@/types";
 import { Transaction, TransactionType } from "@prisma/client";
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
 
-export const getTopCoins = unstable_cache(
-  async (limit: number): Promise<Coin[]> => {
-    const data = await getLatest(limit);
-    const symbols = data.map((coin) => coin.symbol);
-    const metadata = await getMetadata(symbols);
+export const getTopCoins = async (limit: number): Promise<Coin[]> => {
+  const data = await getLatest(limit);
+  const symbols = data.map((coin) => coin.symbol);
+  const metadata = await getMetadata(symbols);
 
-    return data.map((coin) => {
-      const coinMetadata = metadata[coin.symbol]?.[0];
-      return {
-        name: coin.name,
-        symbol: coin.symbol,
-        rank: coin.cmc_rank,
-        price: coin.quote.EUR.price,
-        percentChange1h: coin.quote.EUR.percent_change_1h,
-        percentChange24h: coin.quote.EUR.percent_change_24h,
-        percentChange7d: coin.quote.EUR.percent_change_7d,
-        marketCap: coin.quote.EUR.market_cap,
-        volume24h: coin.quote.EUR.volume_24h,
-        circulatingSupply: coin.circulating_supply,
-        metadata: {
-          logo: coinMetadata?.logo,
-        },
-      };
-    });
-  },
-  ["top-coins"],
-  { revalidate: 60 * 60 * 24 }
-);
+  return data.map((coin) => {
+    const coinMetadata = metadata[coin.symbol]?.[0];
+    return {
+      name: coin.name,
+      symbol: coin.symbol,
+      rank: coin.cmc_rank,
+      price: coin.quote.EUR.price,
+      percentChange1h: coin.quote.EUR.percent_change_1h,
+      percentChange24h: coin.quote.EUR.percent_change_24h,
+      percentChange7d: coin.quote.EUR.percent_change_7d,
+      marketCap: coin.quote.EUR.market_cap,
+      volume24h: coin.quote.EUR.volume_24h,
+      circulatingSupply: coin.circulating_supply,
+      metadata: {
+        logo: coinMetadata?.logo,
+      },
+    };
+  });
+};
 
 export const getTransactions = async (
   userId: string
@@ -43,58 +39,58 @@ export const getTransactions = async (
   });
 };
 
-export const getDashboardData = async (
-  userId: string
-): Promise<DashboardData> => {
-  const { balance } = await prisma.user.findUniqueOrThrow({
-    where: { id: userId },
-  });
-  const transactions = await prisma.transaction.findMany({
-    where: { userId },
-  });
+export const getDashboardData = cache(
+  async (userId: string): Promise<DashboardData> => {
+    const { balance } = await prisma.user.findUniqueOrThrow({
+      where: { id: userId },
+    });
+    const transactions = await prisma.transaction.findMany({
+      where: { userId },
+    });
 
-  const ownedCoins = await getWallet(transactions);
-  const portfolioValue = ownedCoins.reduce((total, coin) => {
-    return total + coin.currentPrice * coin.quantity;
-  }, 0);
+    const ownedCoins = await getWallet(transactions);
+    const portfolioValue = ownedCoins.reduce((total, coin) => {
+      return total + coin.currentPrice * coin.quantity;
+    }, 0);
 
-  const capital = portfolioValue + balance;
-  const percentageChange =
-    ((capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
+    const capital = portfolioValue + balance;
+    const percentageChange =
+      ((capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
 
-  const capitalDataPoints = await prisma.capitalDataPoint.findMany({
-    where: { userId },
-    orderBy: { createdAt: "asc" },
-  });
+    const capitalDataPoints = await prisma.capitalDataPoint.findMany({
+      where: { userId },
+      orderBy: { createdAt: "asc" },
+    });
 
-  const capitalYesterday =
-    capitalDataPoints.length === 0
-      ? INITIAL_CAPITAL
-      : capitalDataPoints[capitalDataPoints.length - 1].capital;
-  const capitalChangeToday = capital - capitalYesterday;
-  const capitalChangeTodayPercentage =
-    (capitalChangeToday / capitalYesterday) * 100;
+    const capitalYesterday =
+      capitalDataPoints.length === 0
+        ? INITIAL_CAPITAL
+        : capitalDataPoints[capitalDataPoints.length - 1].capital;
+    const capitalChangeToday = capital - capitalYesterday;
+    const capitalChangeTodayPercentage =
+      (capitalChangeToday / capitalYesterday) * 100;
 
-  const parsedCapitalData = capitalDataPoints.map((dataPoint) => ({
-    ...dataPoint,
-    createdAt: new Date(dataPoint.createdAt),
-  }));
+    const parsedCapitalData = capitalDataPoints.map((dataPoint) => ({
+      ...dataPoint,
+      createdAt: new Date(dataPoint.createdAt),
+    }));
 
-  return {
-    balance,
-    capital: {
-      value: capital,
-      percentageChange: percentageChange,
-    },
-    capitalToday: {
-      value: capitalChangeToday,
-      percentageChange: capitalChangeTodayPercentage,
-    },
-    ownedCoins,
-    capitalDataPoints: parsedCapitalData,
-    coinCapitalValue: capital - balance,
-  };
-};
+    return {
+      balance,
+      capital: {
+        value: capital,
+        percentageChange: percentageChange,
+      },
+      capitalToday: {
+        value: capitalChangeToday,
+        percentageChange: capitalChangeTodayPercentage,
+      },
+      ownedCoins,
+      capitalDataPoints: parsedCapitalData,
+      coinCapitalValue: capital - balance,
+    };
+  }
+);
 
 export const createTransaction = async (
   userId: string,

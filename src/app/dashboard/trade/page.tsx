@@ -14,8 +14,8 @@ import {
   TextInput,
   Title,
 } from "@tremor/react";
-import { useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useState } from "react";
+import { useFormStatus } from "react-dom";
 import { TradeDialog } from "./TradeDialog";
 
 const SubmitButton = () => {
@@ -30,7 +30,7 @@ const SubmitButton = () => {
 export default function Trade() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState(0);
-  const [state, formAction] = useFormState(fetchTradeDetails, {
+  const [state, formAction] = useActionState(fetchTradeDetails, {
     data: null,
     isError: false,
     input: {

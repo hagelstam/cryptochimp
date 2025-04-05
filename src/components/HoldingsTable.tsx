@@ -1,6 +1,6 @@
 import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
+import { getDashboardData } from "@/lib/api";
 import { formatCurrency, formatPercentage, getDeltaType } from "@/lib/utils";
-import { OwnedCoin } from "@/types";
 import {
   BadgeDelta,
   Card,
@@ -13,7 +13,9 @@ import {
   Title,
 } from "@tremor/react";
 
-export const HoldingsTable = ({ ownedCoins }: { ownedCoins: OwnedCoin[] }) => {
+export const HoldingsTable = async ({ userId }: { userId: string }) => {
+  const { ownedCoins } = await getDashboardData(userId);
+
   if (ownedCoins.length === 0)
     return <EmptyPlaceholder className="h-[340px]" />;
 
