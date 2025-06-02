@@ -18,7 +18,7 @@
     "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.3",
+    "@headlessui/react": "^2.2.4",
     "@headlessui/tailwindcss": "^0.2.2",
     "@heroicons/react": "^2.2.0",
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -26,7 +26,7 @@
     "@tremor/react": "^3.18.7",
     "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",
-    "next": "15.3.2",
+    "next": "15.3.3",
     "next-auth": "4.24.11",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
@@ -35,19 +35,19 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/forms": "^0.5.10",
-    "@types/node": "^22.15.19",
-    "@types/react": "^19.1.4",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.27.0",
-    "eslint-config-next": "^15.3.2",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.3.3",
     "eslint-plugin-tailwindcss": "^3.18.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.4",
     "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
+    "prettier-plugin-tailwindcss": "^0.6.12",
     "prisma": "^6.8.2",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.0"
   }
 }
