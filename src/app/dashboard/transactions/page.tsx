@@ -13,7 +13,7 @@ export default async function Transactions() {
 
   return (
     <Suspense fallback={<Skeleton className="h-96 w-full" />}>
-      <TransactionsProvider userId={user.id} />;
+      <TransactionsProvider userId={user.id} />
     </Suspense>
   );
 }
