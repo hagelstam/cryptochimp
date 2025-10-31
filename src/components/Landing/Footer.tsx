@@ -1,5 +1,5 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { cacheLife } from "next/cache";
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { cacheLife } from 'next/cache';
 
 export const Footer = async ({
   profileLink,
@@ -8,15 +8,15 @@ export const Footer = async ({
   profileLink: string;
   repoLink: string;
 }) => {
-  "use cache";
-  cacheLife("days");
+  'use cache';
+  cacheLife('days');
 
   return (
     <footer>
       <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <p className="text-center text-sm leading-loose md:text-left">
-            Built by{" "}
+            Built by{' '}
             <a
               href={profileLink}
               target="_blank"
@@ -25,7 +25,7 @@ export const Footer = async ({
             >
               Maximilian Hagelstam
             </a>
-            . The source code is available on{" "}
+            . The source code is available on{' '}
             <a
               href={repoLink}
               target="_blank"

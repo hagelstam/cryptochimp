@@ -1,7 +1,7 @@
-import { DashboardLayout } from "@/components/DashboardLayout";
-import { getCurrentUser } from "@/lib/auth";
-import { LOGIN_URL } from "@/lib/constants";
-import { redirect } from "next/navigation";
+import { DashboardLayout } from '@/components/DashboardLayout';
+import { getCurrentUser } from '@/lib/auth';
+import { LOGIN_URL } from '@/lib/constants';
+import { redirect } from 'next/navigation';
 
 export default async function DashboardRootLayout({
   children,

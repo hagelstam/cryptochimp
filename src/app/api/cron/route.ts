@@ -1,7 +1,7 @@
-import { getPrices } from "@/lib/crypto";
-import { prisma } from "@/lib/db";
-import { getOwnedCoins } from "@/lib/utils";
-import { Transaction, User } from "@prisma/client";
+import { getPrices } from '@/lib/crypto';
+import { prisma } from '@/lib/db';
+import { getOwnedCoins } from '@/lib/utils';
+import { Transaction, User } from '@prisma/client';
 
 const getUniqueCryptoSymbols = (users: User[], transactions: Transaction[]) => {
   const ownedCoins = users.map((user) => {
@@ -37,9 +37,9 @@ const calculatePortfolioValue = (
 };
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("authorization");
+  const authHeader = request.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return new Response("Unauthorized", {
+    return new Response('Unauthorized', {
       status: 401,
     });
   }
@@ -76,12 +76,12 @@ export async function GET(request: Request) {
       })
     );
 
-    return new Response("Success", {
+    return new Response('Success', {
       status: 200,
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_err) {
-    return new Response("Error", {
+    return new Response('Error', {
       status: 500,
     });
   }

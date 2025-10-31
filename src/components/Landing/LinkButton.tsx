@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import Link from "next/link";
-import type { ReactNode } from "react";
+import clsx from 'clsx';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 export const LinkButton = ({
   children,
@@ -16,9 +16,9 @@ export const LinkButton = ({
   return (
     <Link
       href={href}
-      target={newTab ? "_blank" : "_self"}
+      target={newTab ? '_blank' : '_self'}
       className={clsx(
-        "inline-flex h-11 items-center justify-center rounded-lg px-8 text-base font-medium",
+        'inline-flex h-11 items-center justify-center rounded-lg px-8 text-base font-medium',
         className
       )}
     >

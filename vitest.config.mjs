@@ -2,7 +2,7 @@
 const config = {
   plugins: [],
   test: {
-    environment: "node",
+    environment: 'node',
   },
 };
 

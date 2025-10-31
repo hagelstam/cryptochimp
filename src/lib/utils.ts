@@ -1,9 +1,9 @@
-import { Transaction } from "@prisma/client";
+import { Transaction } from '@prisma/client';
 
 export const formatCurrency = (value: number) =>
-  value.toLocaleString("fi-FI", {
-    style: "currency",
-    currency: "EUR",
+  value.toLocaleString('fi-FI', {
+    style: 'currency',
+    currency: 'EUR',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -11,8 +11,8 @@ export const formatCurrency = (value: number) =>
 export const formatPercentage = (value: number) => `${value.toFixed(1)}%`;
 
 export const getDeltaType = (percentChange: number) => {
-  if (percentChange >= -0.1 && percentChange <= 0.1) return "unchanged";
-  return percentChange < 0 ? "moderateDecrease" : "moderateIncrease";
+  if (percentChange >= -0.1 && percentChange <= 0.1) return 'unchanged';
+  return percentChange < 0 ? 'moderateDecrease' : 'moderateIncrease';
 };
 
 export const calculateCoinShare = (
@@ -35,7 +35,7 @@ export const getOwnedCoins = (transactions: Transaction[]) => {
       (transaction) => transaction.symbol === symbol
     );
     const totalQuantity = symbolTransactions.reduce((total, transaction) => {
-      if (transaction.type === "BUY") {
+      if (transaction.type === 'BUY') {
         return total + transaction.quantity;
       }
       return total - transaction.quantity;

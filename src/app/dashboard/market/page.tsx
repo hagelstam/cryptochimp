@@ -1,5 +1,5 @@
-import { getTopCoins } from "@/lib/api";
-import { formatCurrency, formatPercentage, getDeltaType } from "@/lib/utils";
+import { getTopCoins } from '@/lib/api';
+import { formatCurrency, formatPercentage, getDeltaType } from '@/lib/utils';
 import {
   BadgeDelta,
   Card,
@@ -10,13 +10,13 @@ import {
   TableHeaderCell,
   TableRow,
   Title,
-} from "@tremor/react";
-import { cacheLife } from "next/cache";
-import Image from "next/image";
+} from '@tremor/react';
+import { cacheLife } from 'next/cache';
+import Image from 'next/image';
 
 export default async function Market() {
-  "use cache";
-  cacheLife("hours");
+  'use cache';
+  cacheLife('hours');
 
   const coins = await getTopCoins(25);
 
@@ -90,7 +90,7 @@ export default async function Market() {
                 {formatCurrency(coin.volume24h)}
               </TableCell>
               <TableCell className="text-right">
-                {`${coin.circulatingSupply.toLocaleString("fi-FI")} ${coin.symbol}`}
+                {`${coin.circulatingSupply.toLocaleString('fi-FI')} ${coin.symbol}`}
               </TableCell>
             </TableRow>
           ))}

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Button, type ButtonProps } from "@tremor/react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { ElementType } from "react";
+import { Button, type ButtonProps } from '@tremor/react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { ElementType } from 'react';
 
 const GoogleIcon: ElementType = () => {
   return (
@@ -32,11 +32,11 @@ export const SignInButton = (props: ButtonProps) => {
     <Button
       icon={GoogleIcon}
       onClick={async () => {
-        const data = await signIn("google", {
+        const data = await signIn('google', {
           redirect: false,
-          callbackUrl: "/dashboard",
+          callbackUrl: '/dashboard',
         });
-        router.push(data?.url ?? "/");
+        router.push(data?.url ?? '/');
       }}
       {...props}
     >

@@ -1,10 +1,10 @@
-import { UserMenu } from "@/components/UserMenu";
-import { User } from "@/types";
-import Image from "next/image";
-import Link from "next/link";
-import { ReactNode } from "react";
-import { MobileNav } from "./MobileNav";
-import { Sidebar } from "./Sidebar";
+import { UserMenu } from '@/components/UserMenu';
+import { User } from '@/types';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ReactNode } from 'react';
+import { MobileNav } from './MobileNav';
+import { Sidebar } from './Sidebar';
 
 export const DashboardLayout = ({
   user,

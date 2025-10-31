@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 import {
   calculateCoinShare,
   formatCurrency,
   formatPercentage,
-} from "@/lib/utils";
-import { OwnedCoin } from "@/types";
-import { ChartPieIcon, QueueListIcon } from "@heroicons/react/24/outline";
+} from '@/lib/utils';
+import { OwnedCoin } from '@/types';
+import { ChartPieIcon, QueueListIcon } from '@heroicons/react/24/outline';
 import {
   Badge,
   Card,
@@ -19,8 +19,8 @@ import {
   TabGroup,
   TabList,
   Title,
-} from "@tremor/react";
-import { useState } from "react";
+} from '@tremor/react';
+import { useState } from 'react';
 
 export const PortfolioChart = ({
   chartData,

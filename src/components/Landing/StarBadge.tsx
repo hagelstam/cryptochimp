@@ -1,10 +1,10 @@
-import { getStarCount } from "@/lib/api";
-import { cacheLife } from "next/cache";
-import Link from "next/link";
+import { getStarCount } from '@/lib/api';
+import { cacheLife } from 'next/cache';
+import Link from 'next/link';
 
 export const StarBadge = async ({ repoLink }: { repoLink: string }) => {
-  "use cache";
-  cacheLife("hours");
+  'use cache';
+  cacheLife('hours');
 
   const starCount = await getStarCount();
 

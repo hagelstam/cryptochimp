@@ -1,9 +1,9 @@
-import { CoinMetadata } from "@/types";
+import { CoinMetadata } from '@/types';
 
 export const getLatest = async (limit: number) => {
   return new Array(limit).fill(null).map((_, index) => ({
-    name: "Bitcoin",
-    symbol: "BTC",
+    name: 'Bitcoin',
+    symbol: 'BTC',
     cmc_rank: index,
     circulating_supply: 19_000_000,
     quote: {
@@ -19,8 +19,8 @@ export const getLatest = async (limit: number) => {
   }));
 };
 
-export const getPrice = async (symbol: string = "") => {
-  if (symbol === "BTC") return 40_000;
+export const getPrice = async (symbol: string = '') => {
+  if (symbol === 'BTC') return 40_000;
   return 100;
 };
 
@@ -30,7 +30,7 @@ export const getMetadata = async (symbols: string[]) => {
       ...acc,
       [symbol]: [
         {
-          logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
+          logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png',
         },
       ],
     }),

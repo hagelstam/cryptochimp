@@ -1,13 +1,13 @@
-import { SignInButton } from "@/components/SigninButton";
-import { getCurrentUser } from "@/lib/auth";
-import { Card } from "@tremor/react";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import { SignInButton } from '@/components/SigninButton';
+import { getCurrentUser } from '@/lib/auth';
+import { Card } from '@tremor/react';
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 export default async function Login() {
   const user = await getCurrentUser();
   if (user) {
-    redirect("/dashboard");
+    redirect('/dashboard');
   }
 
   return (

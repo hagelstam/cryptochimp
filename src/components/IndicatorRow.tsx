@@ -1,7 +1,7 @@
-import { IndicatorCard } from "@/components/IndicatorCard";
-import { getDashboardData } from "@/lib/api";
-import { INITIAL_CAPITAL } from "@/lib/constants";
-import { Grid } from "@tremor/react";
+import { IndicatorCard } from '@/components/IndicatorCard';
+import { getDashboardData } from '@/lib/api';
+import { INITIAL_CAPITAL } from '@/lib/constants';
+import { Grid } from '@tremor/react';
 
 export const IndicatorRow = async ({ userId }: { userId: string }) => {
   const data = await getDashboardData(userId);

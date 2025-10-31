@@ -1,4 +1,4 @@
-import { CapitalDataPoint } from "@prisma/client";
+import { CapitalDataPoint } from '@prisma/client';
 
 export type User = {
   id: string;

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
-import { formatCurrency } from "@/lib/utils";
-import { Transaction } from "@prisma/client";
+import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
+import { formatCurrency } from '@/lib/utils';
+import { Transaction } from '@prisma/client';
 import {
   Badge,
   Card,
@@ -19,8 +19,8 @@ import {
   TableHeaderCell,
   TableRow,
   Title,
-} from "@tremor/react";
-import { useState } from "react";
+} from '@tremor/react';
+import { useState } from 'react';
 
 export const TransactionsTable = ({
   transactions,
@@ -134,19 +134,19 @@ export const TransactionsTable = ({
           {filteredTransactions.map((transaction) => (
             <TableRow key={transaction.id}>
               <TableCell>
-                {transaction.createdAt.toLocaleDateString("fi-FI")}
+                {transaction.createdAt.toLocaleDateString('fi-FI')}
               </TableCell>
               <TableCell className="text-right">{transaction.symbol}</TableCell>
               <TableCell className="text-right">
                 <Badge
                   size="xs"
-                  color={transaction.type === "BUY" ? "blue" : "pink"}
+                  color={transaction.type === 'BUY' ? 'blue' : 'pink'}
                 >
                   {transaction.type}
                 </Badge>
               </TableCell>
               <TableCell className="text-right">
-                {transaction.quantity.toLocaleString("fi-FI")}
+                {transaction.quantity.toLocaleString('fi-FI')}
               </TableCell>
               <TableCell className="text-right">
                 {formatCurrency(transaction.pricePerCoin)}
@@ -154,12 +154,12 @@ export const TransactionsTable = ({
               <TableCell className="text-right">
                 <span
                   className={
-                    transaction.type === "BUY"
-                      ? "text-red-500"
-                      : "text-green-500"
+                    transaction.type === 'BUY'
+                      ? 'text-red-500'
+                      : 'text-green-500'
                   }
                 >
-                  {`${transaction.type === "BUY" ? "-" : "+"}${formatCurrency(
+                  {`${transaction.type === 'BUY' ? '-' : '+'}${formatCurrency(
                     transaction.quantity * transaction.pricePerCoin
                   )}`}
                 </span>

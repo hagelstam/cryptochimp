@@ -1,9 +1,9 @@
-import { LOGIN_URL } from "@/lib/constants";
-import { prisma } from "@/lib/db";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { NextAuthOptions, getServerSession } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { cache } from "react";
+import { LOGIN_URL } from '@/lib/constants';
+import { prisma } from '@/lib/db';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { NextAuthOptions, getServerSession } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { cache } from 'react';
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
@@ -25,9 +25,9 @@ export const authOptions: NextAuthOptions = {
     signIn: LOGIN_URL,
   },
   theme: {
-    colorScheme: "light",
-    brandColor: "#3b82f6",
-    logo: "/logo.svg",
+    colorScheme: 'light',
+    brandColor: '#3b82f6',
+    logo: '/logo.svg',
   },
 };
 

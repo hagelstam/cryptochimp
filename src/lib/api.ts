@@ -1,9 +1,9 @@
-import { INITIAL_CAPITAL } from "@/lib/constants";
-import { getLatest, getMetadata, getPrice, getWallet } from "@/lib/crypto";
-import { prisma } from "@/lib/db";
-import { Coin, DashboardData, TradeDetails } from "@/types";
-import { Transaction, TransactionType } from "@prisma/client";
-import { cache } from "react";
+import { INITIAL_CAPITAL } from '@/lib/constants';
+import { getLatest, getMetadata, getPrice, getWallet } from '@/lib/crypto';
+import { prisma } from '@/lib/db';
+import { Coin, DashboardData, TradeDetails } from '@/types';
+import { Transaction, TransactionType } from '@prisma/client';
+import { cache } from 'react';
 
 export const getTopCoins = async (limit: number): Promise<Coin[]> => {
   const data = await getLatest(limit);
@@ -34,7 +34,7 @@ export const getTransactions = async (
   userId: string
 ): Promise<Transaction[]> => {
   return await prisma.transaction.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: 'desc' },
     where: { userId },
   });
 };
@@ -59,7 +59,7 @@ export const getDashboardData = cache(
 
     const capitalDataPoints = await prisma.capitalDataPoint.findMany({
       where: { userId },
-      orderBy: { createdAt: "asc" },
+      orderBy: { createdAt: 'asc' },
     });
 
     const capitalYesterday =
@@ -101,14 +101,14 @@ export const createTransaction = async (
   const pricePerCoin = await getPrice(symbol);
   const total = quantity * pricePerCoin;
 
-  if (type === "BUY") {
+  if (type === 'BUY') {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
         id: userId,
       },
     });
 
-    if (user.balance < total) throw new Error("Cannot afford purchase");
+    if (user.balance < total) throw new Error('Cannot afford purchase');
 
     await prisma.user.update({
       where: {
@@ -122,7 +122,7 @@ export const createTransaction = async (
     });
   }
 
-  if (type === "SELL") {
+  if (type === 'SELL') {
     const transactionsForCoin = await prisma.transaction.findMany({
       where: {
         userId,
@@ -135,13 +135,13 @@ export const createTransaction = async (
     });
 
     const totalCoinsOwned = transactionsForCoin.reduce((total, transaction) => {
-      if (transaction.type === "BUY") {
+      if (transaction.type === 'BUY') {
         return total + transaction.quantity;
       }
       return total - transaction.quantity;
     }, 0);
 
-    if (totalCoinsOwned < quantity) throw new Error("Not enough coins to sell");
+    if (totalCoinsOwned < quantity) throw new Error('Not enough coins to sell');
 
     await prisma.user.update({
       where: {
@@ -179,14 +179,14 @@ export const getTradeDetails = async (
       id: userId,
     },
   });
-  const balanceAfter = type === "BUY" ? balance - total : balance + total;
+  const balanceAfter = type === 'BUY' ? balance - total : balance + total;
 
   return { balance, balanceAfter, pricePerCoin, total };
 };
 
 export const getStarCount = async () => {
-  const res = await fetch("https://api.github.com/repos/hagelstam/cryptochimp");
-  if (!res.ok) throw new Error("Error getting star count");
+  const res = await fetch('https://api.github.com/repos/hagelstam/cryptochimp');
+  if (!res.ok) throw new Error('Error getting star count');
   const data = (await res.json()) as { stargazers_count: number };
   return data.stargazers_count;
 };
