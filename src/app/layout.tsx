@@ -1,28 +1,28 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Suspense } from "react";
-import "./globals.css";
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Suspense } from 'react';
+import './globals.css';
 
 export const metadata = {
-  title: "CryptoChimp",
-  description: "Cryptocurrency trading platform",
+  title: 'CryptoChimp',
+  description: 'Cryptocurrency trading platform',
   keywords: [
-    "Crypto",
-    "Bitcoin",
-    "Ethereum",
-    "Next.js",
-    "React",
-    "Tailwind CSS",
+    'Crypto',
+    'Bitcoin',
+    'Ethereum',
+    'Next.js',
+    'React',
+    'Tailwind CSS',
   ],
   authors: [
     {
-      name: "Maximilian Hagelstam",
-      url: "https://maximilian-hagelstam.vercel.app",
+      name: 'Maximilian Hagelstam',
+      url: 'https://maximilian-hagelstam.vercel.app',
     },
   ],
-  creator: "Maximilian Hagelstam",
-  icons: { icon: "/favicon.ico" },
+  creator: 'Maximilian Hagelstam',
+  icons: { icon: '/favicon.ico' },
 };
 
 export default function RootLayout({

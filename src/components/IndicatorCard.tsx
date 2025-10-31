@@ -1,5 +1,5 @@
-import { formatCurrency, formatPercentage, getDeltaType } from "@/lib/utils";
-import { BadgeDelta, Card, Flex, Metric, Text } from "@tremor/react";
+import { formatCurrency, formatPercentage, getDeltaType } from '@/lib/utils';
+import { BadgeDelta, Card, Flex, Metric, Text } from '@tremor/react';
 
 type IndicatorCardProps = {
   title: string;

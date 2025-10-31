@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Select, SelectItem } from "@tremor/react";
-import { useTheme } from "next-themes";
+import { Select, SelectItem } from '@tremor/react';
+import { useTheme } from 'next-themes';
 
 export const ThemeSelect = () => {
   const { theme, setTheme } = useTheme();

@@ -1,8 +1,8 @@
-import { SignInButton } from "@/components/SigninButton";
-import { UserMenu } from "@/components/UserMenu";
-import { getCurrentUser } from "@/lib/auth";
-import Image from "next/image";
-import Link from "next/link";
+import { SignInButton } from '@/components/SigninButton';
+import { UserMenu } from '@/components/UserMenu';
+import { getCurrentUser } from '@/lib/auth';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const Header = async () => {
   const user = await getCurrentUser();

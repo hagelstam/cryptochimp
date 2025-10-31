@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { fetchTradeDetails } from "@/actions";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import { fetchTradeDetails } from '@/actions';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import {
   Bold,
   Button,
@@ -13,10 +13,10 @@ import {
   SelectItem,
   TextInput,
   Title,
-} from "@tremor/react";
-import { useActionState, useState } from "react";
-import { useFormStatus } from "react-dom";
-import { TradeDialog } from "./TradeDialog";
+} from '@tremor/react';
+import { useActionState, useState } from 'react';
+import { useFormStatus } from 'react-dom';
+import { TradeDialog } from './TradeDialog';
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -35,8 +35,8 @@ export default function Trade() {
     isError: false,
     input: {
       quantity: 0,
-      symbol: "",
-      type: "BUY",
+      symbol: '',
+      type: 'BUY',
     },
   });
 

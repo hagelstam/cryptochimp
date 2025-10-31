@@ -1,8 +1,8 @@
-import { Footer, Header, LinkButton, StarBadge } from "@/components/Landing";
-import { Suspense } from "react";
+import { Footer, Header, LinkButton, StarBadge } from '@/components/Landing';
+import { Suspense } from 'react';
 
-const GITHUB_REPO_LINK = "https://github.com/hagelstam/cryptochimp";
-const GITHUB_PROFILE_LINK = "https://github.com/hagelstam";
+const GITHUB_REPO_LINK = 'https://github.com/hagelstam/cryptochimp';
+const GITHUB_PROFILE_LINK = 'https://github.com/hagelstam';
 
 export default async function Landing() {
   return (

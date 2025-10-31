@@ -1,7 +1,7 @@
-import { getDashboardData } from "@/lib/api";
-import { Col, Grid } from "@tremor/react";
-import { CapitalChart } from "./CapitalChart";
-import { PortfolioChart } from "./PortfolioChart";
+import { getDashboardData } from '@/lib/api';
+import { Col, Grid } from '@tremor/react';
+import { CapitalChart } from './CapitalChart';
+import { PortfolioChart } from './PortfolioChart';
 
 export const ChartRow = async ({ userId }: { userId: string }) => {
   const data = await getDashboardData(userId);

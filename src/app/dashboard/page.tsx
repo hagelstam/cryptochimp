@@ -1,12 +1,12 @@
-import { ChartRow } from "@/components/ChartRow";
-import { HoldingsTable } from "@/components/HoldingsTable";
-import { IndicatorRow } from "@/components/IndicatorRow";
-import { Skeleton } from "@/components/Skeleton";
-import { getCurrentUser } from "@/lib/auth";
-import { LOGIN_URL } from "@/lib/constants";
-import { Col, Grid } from "@tremor/react";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
+import { ChartRow } from '@/components/ChartRow';
+import { HoldingsTable } from '@/components/HoldingsTable';
+import { IndicatorRow } from '@/components/IndicatorRow';
+import { Skeleton } from '@/components/Skeleton';
+import { getCurrentUser } from '@/lib/auth';
+import { LOGIN_URL } from '@/lib/constants';
+import { Col, Grid } from '@tremor/react';
+import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default async function Dashboard() {
   const user = await getCurrentUser();

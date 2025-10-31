@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@tremor/react";
+import { Button } from '@tremor/react';
 
 export default function Error({ reset }: { reset: () => void }) {
   return (

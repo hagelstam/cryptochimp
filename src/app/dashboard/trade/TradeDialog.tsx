@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { trade } from "@/actions";
-import { formatCurrency } from "@/lib/utils";
-import { TradeDetails } from "@/types";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { TransactionType } from "@prisma/client";
+import { trade } from '@/actions';
+import { formatCurrency } from '@/lib/utils';
+import { TradeDetails } from '@/types';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { TransactionType } from '@prisma/client';
 import {
   Badge,
   Button,
@@ -18,9 +18,9 @@ import {
   TableHeaderCell,
   TableRow,
   Title,
-} from "@tremor/react";
-import clsx from "clsx";
-import { useFormState, useFormStatus } from "react-dom";
+} from '@tremor/react';
+import clsx from 'clsx';
+import { useFormState, useFormStatus } from 'react-dom';
 
 const SubmitButton = ({ canAfford }: { canAfford: boolean }) => {
   const { pending } = useFormStatus();
@@ -47,7 +47,7 @@ export const TradeDialog = ({
 }: TradeDialogProps) => {
   const [state, formAction] = useFormState(trade, {
     isError: false,
-    message: "",
+    message: '',
   });
 
   const canAfford = details.balanceAfter > 0;
@@ -57,7 +57,7 @@ export const TradeDialog = ({
       <DialogPanel>
         <div className="flex flex-row gap-3">
           <Title>Confirm trade</Title>
-          <Badge size="xs" color={input.type === "BUY" ? "blue" : "pink"}>
+          <Badge size="xs" color={input.type === 'BUY' ? 'blue' : 'pink'}>
             {input.type}
           </Badge>
         </div>
@@ -111,7 +111,7 @@ export const TradeDialog = ({
             <TableRow>
               <TableCell>Cash balance after trade</TableCell>
               <TableCell
-                className={clsx(!canAfford && "text-red-500", "text-right")}
+                className={clsx(!canAfford && 'text-red-500', 'text-right')}
               >
                 {formatCurrency(details.balanceAfter)}
               </TableCell>

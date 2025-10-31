@@ -1,18 +1,18 @@
-import { getOwnedCoins } from "@/lib/utils";
-import { CoinMetadata } from "@/types";
-import type { Transaction } from "@prisma/client";
+import { getOwnedCoins } from '@/lib/utils';
+import { CoinMetadata } from '@/types';
+import type { Transaction } from '@prisma/client';
 
 const fetchCrypto = async <T>(url: string): Promise<T> => {
   const res = await fetch(
     `https://pro-api.coinmarketcap.com/v1/cryptocurrency/${url}&convert=EUR`,
     {
       headers: {
-        "X-CMC_PRO_API_KEY": process.env.CMC_API_KEY,
-        Accept: "application/json",
+        'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
+        Accept: 'application/json',
       },
     }
   );
-  if (!res.ok) throw new Error("Error fetching crypto data");
+  if (!res.ok) throw new Error('Error fetching crypto data');
   const json = (await res.json()) as { data: T };
   return json.data;
 };
@@ -64,7 +64,7 @@ export const getPrices = async (symbols: string[]) => {
         };
       };
     };
-  }>(`quotes/latest?symbol=${symbols.join(",")}`);
+  }>(`quotes/latest?symbol=${symbols.join(',')}`);
 
   const priceRecord: Record<string, number> = {};
 
@@ -81,15 +81,15 @@ export const getMetadata = async (
   symbols: string[]
 ): Promise<{ [key: string]: CoinMetadata[] }> => {
   const res = await fetch(
-    `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${symbols.join(",")}`,
+    `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${symbols.join(',')}`,
     {
       headers: {
-        "X-CMC_PRO_API_KEY": process.env.CMC_API_KEY,
-        Accept: "application/json",
+        'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
+        Accept: 'application/json',
       },
     }
   );
-  if (!res.ok) throw new Error("CoinMarketCap rate limited us");
+  if (!res.ok) throw new Error('CoinMarketCap rate limited us');
   const json = (await res.json()) as {
     data: { [key: string]: CoinMetadata[] };
   };
@@ -101,7 +101,7 @@ export const getWallet = async (transactions: Transaction[]) => {
 
   const ownedCoins = getOwnedCoins(transactions);
 
-  const ownedCoinSymbols = ownedCoins.map((coin) => coin.symbol).join(",");
+  const ownedCoinSymbols = ownedCoins.map((coin) => coin.symbol).join(',');
   const data = await fetchCrypto<{
     [key: string]: {
       name: string;

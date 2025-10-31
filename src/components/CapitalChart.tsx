@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { formatCurrency } from "@/lib/utils";
-import { CapitalDataPoint } from "@prisma/client";
+import { formatCurrency } from '@/lib/utils';
+import { CapitalDataPoint } from '@prisma/client';
 import {
   AreaChart,
   Card,
@@ -9,8 +9,8 @@ import {
   DateRangePickerItem,
   DateRangePickerValue,
   Title,
-} from "@tremor/react";
-import { useState } from "react";
+} from '@tremor/react';
+import { useState } from 'react';
 
 export const CapitalChart = ({
   chartData,
@@ -34,7 +34,7 @@ export const CapitalChart = ({
     })
     .map((dataPoint) => ({
       capital: dataPoint.capital,
-      date: dataPoint.createdAt?.toLocaleDateString("fi-FI"),
+      date: dataPoint.createdAt?.toLocaleDateString('fi-FI'),
     }));
 
   return (
@@ -90,10 +90,10 @@ export const CapitalChart = ({
       </div>
       <AreaChart
         data={filteredChartData}
-        categories={["capital"]}
+        categories={['capital']}
         index="date"
         className="mt-6 h-72"
-        colors={["blue"]}
+        colors={['blue']}
         showLegend={false}
         valueFormatter={formatCurrency}
         noDataText="No data yet. May take 24h to generate"

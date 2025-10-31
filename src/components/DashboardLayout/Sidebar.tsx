@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Icons, navLinks } from "@/lib/constants";
-import clsx from "clsx";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Icons, navLinks } from '@/lib/constants';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Sidebar = () => {
   const path = usePathname();
@@ -25,9 +25,9 @@ export const Sidebar = () => {
                   href={href}
                   className={clsx(
                     path === href
-                      ? "bg-blue-100 text-gray-950 dark:bg-blue-950 dark:text-gray-50"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-800",
-                    "flex w-full flex-row items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+                      ? 'bg-blue-100 text-gray-950 dark:bg-blue-950 dark:text-gray-50'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+                    'flex w-full flex-row items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200'
                   )}
                 >
                   <Icon className="size-5" />

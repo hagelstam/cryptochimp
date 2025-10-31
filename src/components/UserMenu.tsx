@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { Skeleton } from "@/components/Skeleton";
-import { User } from "@/types";
+import { Skeleton } from '@/components/Skeleton';
+import { User } from '@/types';
 import {
   Menu,
   MenuButton,
   MenuItem,
   MenuItems,
   Transition,
-} from "@headlessui/react";
-import { ChevronDownIcon, PowerIcon } from "@heroicons/react/24/solid";
-import { signOut } from "next-auth/react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Fragment } from "react";
+} from '@headlessui/react';
+import { ChevronDownIcon, PowerIcon } from '@heroicons/react/24/solid';
+import { signOut } from 'next-auth/react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { Fragment } from 'react';
 
 export const UserMenu = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -56,7 +56,7 @@ export const UserMenu = ({ user }: { user: User }) => {
               onClick={async () => {
                 const data = await signOut({
                   redirect: false,
-                  callbackUrl: "/",
+                  callbackUrl: '/',
                 });
                 router.push(data.url);
               }}

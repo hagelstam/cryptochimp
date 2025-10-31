@@ -1,6 +1,6 @@
-import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
-import { getDashboardData } from "@/lib/api";
-import { formatCurrency, formatPercentage, getDeltaType } from "@/lib/utils";
+import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
+import { getDashboardData } from '@/lib/api';
+import { formatCurrency, formatPercentage, getDeltaType } from '@/lib/utils';
 import {
   BadgeDelta,
   Card,
@@ -11,7 +11,7 @@ import {
   TableHeaderCell,
   TableRow,
   Title,
-} from "@tremor/react";
+} from '@tremor/react';
 
 export const HoldingsTable = async ({ userId }: { userId: string }) => {
   const { ownedCoins } = await getDashboardData(userId);
@@ -43,7 +43,7 @@ export const HoldingsTable = async ({ userId }: { userId: string }) => {
               <TableCell>{coin.name}</TableCell>
               <TableCell className="text-right">{coin.symbol}</TableCell>
               <TableCell className="text-right">
-                {coin.quantity.toLocaleString("fi-FI")}
+                {coin.quantity.toLocaleString('fi-FI')}
               </TableCell>
               <TableCell className="text-right">
                 {formatCurrency(coin.currentPrice)}
