@@ -1,5 +1,3 @@
-"use cache";
-
 import { getTopCoins } from "@/lib/api";
 import { formatCurrency, formatPercentage, getDeltaType } from "@/lib/utils";
 import {
@@ -13,9 +11,13 @@ import {
   TableRow,
   Title,
 } from "@tremor/react";
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 
 export default async function Market() {
+  "use cache";
+  cacheLife("hours");
+
   const coins = await getTopCoins(25);
 
   return (

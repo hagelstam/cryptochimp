@@ -16,13 +16,13 @@
   </a>
 </div>
 
-### 📷 Demo
+## Demo
 
 <a href="https://cryptochimp.vercel.app/">
   <img src="./src/app/opengraph-image.png" alt="screenshot" width="800"/>
 </a>
 
-### ⚙️ Getting started
+## Getting started
 
 Install dependencies:
 
@@ -54,7 +54,7 @@ Start the development server:
 pnpm dev
 ```
 
-### 🧪 Testing
+## Testing
 
 Run unit tests:
 
@@ -62,14 +62,13 @@ Run unit tests:
 pnpm test
 ```
 
-### 👾 Built with
+## Built with
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Prisma](https://prisma.io/)
 - [CockroachDB](https://www.cockroachlabs.com/)
-- [Docker](https://www.docker.com/)
 
-### 🎓 License
+## License
 
 This project is licensed under the terms of the [MIT](https://choosealicense.com/licenses/mit/) license.
