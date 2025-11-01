@@ -8,6 +8,7 @@ export const ThemeSelect = () => {
 
   return (
     <Select
+      suppressHydrationWarning
       value={theme}
       onChange={(e) => {
         const newTheme = e as unknown as string;
