@@ -3,16 +3,12 @@ import { HoldingsTable } from '@/components/HoldingsTable';
 import { IndicatorRow } from '@/components/IndicatorRow';
 import { Skeleton } from '@/components/Skeleton';
 import { getCurrentUser } from '@/lib/auth';
-import { LOGIN_URL } from '@/lib/constants';
 import { Col, Grid } from '@tremor/react';
-import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 export default async function Dashboard() {
   const user = await getCurrentUser();
-  if (!user) {
-    redirect(LOGIN_URL);
-  }
+  const userId = user!.id;
 
   return (
     <>
@@ -25,7 +21,7 @@ export default async function Dashboard() {
           </Grid>
         }
       >
-        <IndicatorRow userId={user.id} />
+        <IndicatorRow userId={userId} />
       </Suspense>
       <div className="mt-6">
         <Suspense
@@ -40,12 +36,12 @@ export default async function Dashboard() {
             </Grid>
           }
         >
-          <ChartRow userId={user.id} />
+          <ChartRow userId={userId} />
         </Suspense>
       </div>
       <div className="mt-6">
         <Suspense fallback={<Skeleton className="h-[340px] w-full" />}>
-          <HoldingsTable userId={user.id} />
+          <HoldingsTable userId={userId} />
         </Suspense>
       </div>
     </>

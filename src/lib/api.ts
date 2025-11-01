@@ -1,8 +1,9 @@
 import { INITIAL_CAPITAL } from '@/lib/constants';
 import { getLatest, getMetadata, getPrice, getWallet } from '@/lib/crypto';
 import { prisma } from '@/lib/db';
-import { Coin, DashboardData, TradeDetails } from '@/types';
+import { Coin, TradeDetails } from '@/types';
 import { Transaction, TransactionType } from '@prisma/client';
+import { cacheLife, cacheTag } from 'next/cache';
 import { cache } from 'react';
 
 export const getTopCoins = async (limit: number): Promise<Coin[]> => {
@@ -33,64 +34,88 @@ export const getTopCoins = async (limit: number): Promise<Coin[]> => {
 export const getTransactions = async (
   userId: string
 ): Promise<Transaction[]> => {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag(`user-${userId}-transactions`);
+
   return await prisma.transaction.findMany({
     orderBy: { createdAt: 'desc' },
     where: { userId },
   });
 };
 
-export const getDashboardData = cache(
-  async (userId: string): Promise<DashboardData> => {
-    const { balance } = await prisma.user.findUniqueOrThrow({
-      where: { id: userId },
-    });
-    const transactions = await prisma.transaction.findMany({
-      where: { userId },
-    });
+export const getBalance = async (userId: string): Promise<number> => {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag(`user-${userId}-balance`);
 
-    const ownedCoins = await getWallet(transactions);
-    const portfolioValue = ownedCoins.reduce((total, coin) => {
-      return total + coin.currentPrice * coin.quantity;
-    }, 0);
+  const { balance } = await prisma.user.findUniqueOrThrow({
+    where: { id: userId },
+  });
+  return balance;
+};
 
-    const capital = portfolioValue + balance;
-    const percentageChange =
-      ((capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
+export const getOwnedCoins = async (userId: string) => {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag(`user-${userId}-holdings`);
 
-    const capitalDataPoints = await prisma.capitalDataPoint.findMany({
-      where: { userId },
-      orderBy: { createdAt: 'asc' },
-    });
+  const transactions = await getTransactions(userId);
+  return await getWallet(transactions);
+};
 
-    const capitalYesterday =
-      capitalDataPoints.length === 0
-        ? INITIAL_CAPITAL
-        : capitalDataPoints[capitalDataPoints.length - 1].capital;
-    const capitalChangeToday = capital - capitalYesterday;
-    const capitalChangeTodayPercentage =
-      (capitalChangeToday / capitalYesterday) * 100;
+export const getCapitalDataPoints = async (userId: string) => {
+  'use cache';
+  cacheLife('minutes');
+  cacheTag(`user-${userId}-capital-history`);
 
-    const parsedCapitalData = capitalDataPoints.map((dataPoint) => ({
-      ...dataPoint,
-      createdAt: new Date(dataPoint.createdAt),
-    }));
+  const dataPoints = await prisma.capitalDataPoint.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'asc' },
+  });
 
-    return {
-      balance,
-      capital: {
-        value: capital,
-        percentageChange: percentageChange,
-      },
-      capitalToday: {
-        value: capitalChangeToday,
-        percentageChange: capitalChangeTodayPercentage,
-      },
-      ownedCoins,
-      capitalDataPoints: parsedCapitalData,
-      coinCapitalValue: capital - balance,
-    };
-  }
-);
+  return dataPoints.map((dataPoint) => ({
+    ...dataPoint,
+    createdAt: new Date(dataPoint.createdAt),
+  }));
+};
+
+export const getPortfolioMetrics = async (userId: string) => {
+  const [balance, ownedCoins, capitalDataPoints] = await Promise.all([
+    getBalance(userId),
+    getOwnedCoins(userId),
+    getCapitalDataPoints(userId),
+  ]);
+
+  const portfolioValue = ownedCoins.reduce((total, coin) => {
+    return total + coin.currentPrice * coin.quantity;
+  }, 0);
+
+  const capital = portfolioValue + balance;
+  const percentageChange =
+    ((capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
+
+  const capitalYesterday =
+    capitalDataPoints.length === 0
+      ? INITIAL_CAPITAL
+      : capitalDataPoints[capitalDataPoints.length - 1].capital;
+  const capitalChangeToday = capital - capitalYesterday;
+  const capitalChangeTodayPercentage =
+    (capitalChangeToday / capitalYesterday) * 100;
+
+  return {
+    balance,
+    capital: {
+      value: capital,
+      percentageChange: percentageChange,
+    },
+    capitalToday: {
+      value: capitalChangeToday,
+      percentageChange: capitalChangeTodayPercentage,
+    },
+    coinCapitalValue: capital - balance,
+  };
+};
 
 export const createTransaction = async (
   userId: string,
