@@ -1,5 +1,5 @@
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
-import { getDashboardData } from '@/lib/api';
+import { getOwnedCoins } from '@/lib/api';
 import { formatCurrency, formatPercentage, getDeltaType } from '@/lib/utils';
 import {
   BadgeDelta,
@@ -12,12 +12,16 @@ import {
   TableRow,
   Title,
 } from '@tremor/react';
+import { cacheLife } from 'next/cache';
 
 export const HoldingsTable = async ({ userId }: { userId: string }) => {
-  const { ownedCoins } = await getDashboardData(userId);
+  'use cache';
+  cacheLife('minutes');
 
-  if (ownedCoins.length === 0)
+  const ownedCoins = await getOwnedCoins(userId);
+  if (ownedCoins.length === 0) {
     return <EmptyPlaceholder className="h-[340px]" />;
+  }
 
   return (
     <Card>
