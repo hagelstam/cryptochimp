@@ -4,6 +4,7 @@ import { createTransaction, getTradeDetails } from '@/lib/api';
 import { getCurrentUser } from '@/lib/auth';
 import { TradeDetails } from '@/types';
 import { TransactionType } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 const parseTradeFormData = (formData: FormData) => {
@@ -37,6 +38,8 @@ export const trade = async (
     return { isError, message: error instanceof Error ? error.message : '' };
   } finally {
     if (!isError) {
+      revalidatePath('/dashboard');
+      revalidatePath('/dashboard/transactions');
       redirect('/dashboard/transactions');
     }
   }
