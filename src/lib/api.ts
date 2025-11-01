@@ -155,7 +155,7 @@ export const createTransaction = async (
     });
   }
 
-  return await prisma.transaction.create({
+  const transaction = await prisma.transaction.create({
     data: {
       type,
       quantity,
@@ -164,6 +164,8 @@ export const createTransaction = async (
       userId,
     },
   });
+
+  return transaction;
 };
 
 export const getTradeDetails = async (
@@ -184,9 +186,9 @@ export const getTradeDetails = async (
   return { balance, balanceAfter, pricePerCoin, total };
 };
 
-export const getStarCount = async () => {
+export const getStarCount = cache(async () => {
   const res = await fetch('https://api.github.com/repos/hagelstam/cryptochimp');
   if (!res.ok) throw new Error('Error getting star count');
   const data = (await res.json()) as { stargazers_count: number };
   return data.stargazers_count;
-};
+});
