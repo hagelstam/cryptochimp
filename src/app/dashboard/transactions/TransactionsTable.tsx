@@ -2,7 +2,7 @@
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 import { formatCurrency } from '@/lib/utils';
-import { Transaction } from '@prisma/client';
+import { Transaction } from '@/generated/client';
 import {
   Badge,
   Card,

@@ -44,3 +44,6 @@ yarn-error.log*
 # editor
 .idea
 .vscode
+
+# prisma
+src/generated

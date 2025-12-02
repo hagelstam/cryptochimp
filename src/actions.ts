@@ -3,7 +3,7 @@
 import { createTransaction, getTradeDetails } from '@/lib/api';
 import { getCurrentUser } from '@/lib/auth';
 import { TradeDetails } from '@/types';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '@/generated/client';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 

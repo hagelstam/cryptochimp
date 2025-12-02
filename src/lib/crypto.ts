@@ -1,6 +1,6 @@
 import { getOwnedCoins } from '@/lib/utils';
 import { CoinMetadata } from '@/types';
-import type { Transaction } from '@prisma/client';
+import type { Transaction } from '@/generated/client';
 
 const fetchCrypto = async <T>(url: string): Promise<T> => {
   const res = await fetch(

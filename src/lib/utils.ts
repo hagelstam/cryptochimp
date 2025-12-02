@@ -1,4 +1,4 @@
-import { Transaction } from '@prisma/client';
+import { Transaction } from '@/generated/client';
 
 export const formatCurrency = (value: number) =>
   value.toLocaleString('fi-FI', {

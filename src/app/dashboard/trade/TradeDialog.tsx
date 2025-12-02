@@ -4,7 +4,7 @@ import { trade } from '@/actions';
 import { formatCurrency } from '@/lib/utils';
 import { TradeDetails } from '@/types';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '@/generated/client';
 import {
   Badge,
   Button,
