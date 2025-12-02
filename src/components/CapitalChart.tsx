@@ -1,7 +1,7 @@
 'use client';
 
 import { formatCurrency } from '@/lib/utils';
-import { CapitalDataPoint } from '@prisma/client';
+import { CapitalDataPoint } from '@/generated/client';
 import {
   AreaChart,
   Card,

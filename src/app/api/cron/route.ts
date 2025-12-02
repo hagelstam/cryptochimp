@@ -1,7 +1,7 @@
 import { getPrices } from '@/lib/crypto';
 import { prisma } from '@/lib/db';
 import { getOwnedCoins } from '@/lib/utils';
-import { Transaction, User } from '@prisma/client';
+import { Transaction, User } from '@/generated/client';
 
 const getUniqueCryptoSymbols = (users: User[], transactions: Transaction[]) => {
   const ownedCoins = users.map((user) => {

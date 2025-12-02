@@ -2,7 +2,7 @@ import { INITIAL_CAPITAL } from '@/lib/constants';
 import { getLatest, getMetadata, getPrice, getWallet } from '@/lib/crypto';
 import { prisma } from '@/lib/db';
 import { Coin, TradeDetails } from '@/types';
-import { Transaction, TransactionType } from '@prisma/client';
+import { Transaction, TransactionType } from '@/generated/client';
 import { cacheLife, cacheTag } from 'next/cache';
 import { cache } from 'react';
 

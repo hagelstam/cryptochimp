@@ -1,4 +1,4 @@
-import { Transaction } from '@prisma/client';
+import { Transaction } from '@/generated/client';
 import { describe, expect, it } from 'vitest';
 import {
   calculateCoinShare,
