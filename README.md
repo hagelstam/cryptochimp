@@ -24,42 +24,49 @@
 
 ## Getting started
 
+### Prerequisites
+
+- Bun
+- Docker
+
+### Running locally
+
 Install dependencies:
 
-```bash
-pnpm install
+```sh
+bun install
 ```
 
 Create a `.env` file and fill it out as per `.env.example`:
 
-```bash
+```sh
 cp .env.example .env
 ```
 
 Run a CockroachDB instance with Docker:
 
-```bash
-pnpm db:up
+```sh
+bun db:up
 ```
 
 Run database migrations:
 
-```bash
-pnpm db:push
+```sh
+bun db:push
 ```
 
 Start the development server:
 
-```bash
-pnpm dev
+```sh
+bun dev
 ```
 
 ## Testing
 
 Run unit tests:
 
-```bash
-pnpm test
+```sh
+bun test
 ```
 
 ## Built with
