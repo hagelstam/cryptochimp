@@ -2,13 +2,14 @@ name: Tests
 on:
   push:
     branches: [main]
+    paths-ignore: ['**/*.md']
   pull_request:
-    branches: [main]
+    branches: ['**']
+    paths-ignore: ['**/*.md']
 
 jobs:
   test:
     runs-on: ubuntu-slim
-
     steps:
       - uses: actions/checkout@v6
 
