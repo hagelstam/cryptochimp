@@ -60,7 +60,7 @@ export const getPrices = async (symbols: string[]) => {
     [key: string]: {
       quote: {
         EUR: {
-          price: number;
+          price: number | null;
         };
       };
     };
@@ -70,8 +70,7 @@ export const getPrices = async (symbols: string[]) => {
 
   symbols.forEach((symbol) => {
     const price = data[symbol]?.quote.EUR.price;
-    if (!price) throw new Error(`Invalid symbol: ${symbol}`);
-    priceRecord[symbol] = price;
+    priceRecord[symbol] = price ?? 0;
   });
 
   return priceRecord;
