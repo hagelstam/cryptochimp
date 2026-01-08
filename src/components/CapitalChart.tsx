@@ -27,10 +27,17 @@ export const CapitalChart = ({
   const filteredChartData = chartData
     .filter((dataPoint) => {
       if (!dateRange.from || !dateRange.to) return true;
-      return (
-        dataPoint.createdAt >= dateRange.from &&
-        dataPoint.createdAt <= dateRange.to
-      );
+
+      const dataPointDate = new Date(dataPoint.createdAt);
+      dataPointDate.setHours(0, 0, 0, 0);
+
+      const fromDate = new Date(dateRange.from);
+      fromDate.setHours(0, 0, 0, 0);
+
+      const toDate = new Date(dateRange.to);
+      toDate.setHours(23, 59, 59, 999);
+
+      return dataPointDate >= fromDate && dataPointDate <= toDate;
     })
     .map((dataPoint) => ({
       capital: dataPoint.capital,
