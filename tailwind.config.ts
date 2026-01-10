@@ -1,10 +1,12 @@
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
+import formsPlugin from '@tailwindcss/forms';
+import headlessuiPlugin from '@headlessui/tailwindcss';
 
 const config: Config = {
   darkMode: 'class',
   content: [
-    './src/**/*.{ts,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -111,17 +113,17 @@ const config: Config = {
     {
       pattern:
         /^(bg-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ['hover', 'ui-selected'],
+      variants: ['hover', 'data-[selected]'],
     },
     {
       pattern:
         /^(text-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ['hover', 'ui-selected'],
+      variants: ['hover', 'data-[selected]'],
     },
     {
       pattern:
         /^(border-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ['hover', 'ui-selected'],
+      variants: ['hover', 'data-[selected]'],
     },
     {
       pattern:
@@ -136,8 +138,7 @@ const config: Config = {
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
     },
   ],
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require('@headlessui/tailwindcss'), require('@tailwindcss/forms')],
+  plugins: [formsPlugin, headlessuiPlugin],
 };
 
 export default config;
