@@ -1,8 +1,4 @@
-import {
-  getCapitalDataPoints,
-  getOwnedCoins,
-  getPortfolioMetrics,
-} from '@/lib/api';
+import { getCapitalDataPoints, getOwnedCoins } from '@/lib/api';
 import { Col, Grid } from '@tremor/react';
 import { cacheLife } from 'next/cache';
 import { CapitalChart } from './CapitalChart';
@@ -12,12 +8,14 @@ export const ChartRow = async ({ userId }: { userId: string }) => {
   'use cache';
   cacheLife('minutes');
 
-  const [capitalDataPoints, ownedCoins, { coinCapitalValue }] =
-    await Promise.all([
-      getCapitalDataPoints(userId),
-      getOwnedCoins(userId),
-      getPortfolioMetrics(userId),
-    ]);
+  const [capitalDataPoints, ownedCoins] = await Promise.all([
+    getCapitalDataPoints(userId),
+    getOwnedCoins(userId),
+  ]);
+
+  const portfolioValue = ownedCoins.reduce((total, coin) => {
+    return total + coin.currentPrice * coin.quantity;
+  }, 0);
 
   return (
     <Grid numItemsLg={6} className="mt-6 gap-6">
@@ -27,7 +25,7 @@ export const ChartRow = async ({ userId }: { userId: string }) => {
       <Col numColSpanLg={2}>
         <PortfolioChart
           chartData={ownedCoins}
-          portfolioValue={coinCapitalValue}
+          portfolioValue={portfolioValue}
         />
       </Col>
     </Grid>
