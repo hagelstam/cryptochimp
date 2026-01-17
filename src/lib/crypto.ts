@@ -10,6 +10,7 @@ const fetchCrypto = async <T>(url: string): Promise<T> => {
         'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
         Accept: 'application/json',
       },
+      next: { revalidate: 300 },
     }
   );
   if (!res.ok) throw new Error('Error fetching crypto data');
@@ -86,6 +87,7 @@ export const getMetadata = async (
         'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
         Accept: 'application/json',
       },
+      next: { revalidate: 3600 },
     }
   );
   if (!res.ok) throw new Error('CoinMarketCap rate limited us');

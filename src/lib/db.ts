@@ -15,4 +15,6 @@ export const prisma =
     log: IS_PROD ? ['error'] : ['error', 'warn'],
   });
 
-if (IS_PROD) globalForPrisma.prisma = prisma;
+if (!IS_PROD) {
+  globalForPrisma.prisma = prisma;
+}

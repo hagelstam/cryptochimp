@@ -23,6 +23,16 @@ export const metadata = {
   ],
   creator: 'Maximilian Hagelstam',
   icons: { icon: '/favicon.ico' },
+  metadataBase: new URL('https://cryptochimp.vercel.app'),
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f9fafb' },
+    { media: '(prefers-color-scheme: dark)', color: '#030712' },
+  ],
 };
 
 export default function RootLayout({
