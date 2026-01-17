@@ -7,7 +7,7 @@ import { TransactionType } from '@/generated/client';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-const parseTradeFormData = (formData: FormData) => {
+export const parseTradeFormData = (formData: FormData) => {
   const symbol =
     formData.get('symbol')?.toString().trim().toLocaleUpperCase() ?? '';
   const quantity = Number(formData.get('quantity'));
