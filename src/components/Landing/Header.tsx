@@ -22,8 +22,18 @@ const HeaderLogo = async () => {
 
   return (
     <div className="flex gap-4">
-      <Link href="/" className="flex items-center justify-start">
-        <Image src="/text-logo.svg" alt="Logo" width={190} height={32} />
+      <Link
+        href="/"
+        className="flex items-center justify-start"
+        aria-label="CryptoChimp home"
+      >
+        <Image
+          src="/text-logo.svg"
+          alt="CryptoChimp"
+          width={190}
+          height={32}
+          priority
+        />
       </Link>
     </div>
   );
@@ -33,7 +43,10 @@ const HeaderUserSection = async () => {
   const user = await getCurrentUser();
 
   return (
-    <nav className="ml-auto flex items-center gap-4">
+    <nav
+      className="ml-auto flex items-center gap-4"
+      aria-label="Main navigation"
+    >
       {user ? <UserMenu user={user} /> : <SignInButton size="sm" />}
     </nav>
   );

@@ -6,6 +6,10 @@ import { getCurrentUser } from '@/lib/auth';
 import { Col, Grid } from '@tremor/react';
 import { Suspense } from 'react';
 
+export const metadata = {
+  title: 'Dashboard',
+};
+
 export default async function Dashboard() {
   const user = await getCurrentUser();
   const userId = user!.id;

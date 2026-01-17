@@ -5,6 +5,10 @@ import { Suspense } from 'react';
 import { ThemeSelect } from './ThemeSelect';
 import { UserProfile } from './UserProfile';
 
+export const metadata = {
+  title: 'Settings',
+};
+
 export default async function Settings() {
   const user = await getCurrentUser();
 

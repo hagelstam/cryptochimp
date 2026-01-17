@@ -5,25 +5,49 @@ import { Suspense } from 'react';
 import './globals.css';
 
 export const metadata = {
-  title: 'CryptoChimp',
-  description: 'Cryptocurrency trading platform',
+  metadataBase: new URL('https://cryptochimp.vercel.app'),
+  title: {
+    default: 'CryptoChimp - Cryptocurrency trading platform',
+    template: '%s | CryptoChimp',
+  },
+  description: 'Practice cryptocurrency trading with virtual currency.',
   keywords: [
     'Crypto',
+    'Cryptocurrency',
+    'Crypto trading',
     'Bitcoin',
     'Ethereum',
     'Next.js',
     'React',
-    'Tailwind CSS',
+    'TailwindCSS',
   ],
   authors: [
     {
       name: 'Maximilian Hagelstam',
-      url: 'https://maximilian-hagelstam.vercel.app',
+      url: 'https://maximilianhagelstam.com',
     },
   ],
   creator: 'Maximilian Hagelstam',
-  icons: { icon: '/favicon.ico' },
-  metadataBase: new URL('https://cryptochimp.vercel.app'),
+  publisher: 'Maximilian Hagelstam',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  manifest: '/manifest.json',
+  alternates: {
+    canonical: 'https://cryptochimp.vercel.app',
+  },
 };
 
 export const viewport = {

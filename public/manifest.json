@@ -1,0 +1,16 @@
+{
+  "name": "CryptoChimp - Cryptocurrency trading platform",
+  "short_name": "CryptoChimp",
+  "description": "Practice cryptocurrency trading with virtual currency",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#030712",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
