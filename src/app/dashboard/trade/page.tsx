@@ -3,7 +3,6 @@
 import { fetchTradeDetails } from '@/actions';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import {
-  Bold,
   Button,
   Callout,
   Card,
@@ -67,34 +66,49 @@ export default function Trade() {
               </Callout>
             </div>
           )}
-          <form action={onSubmit} className="flex flex-col gap-4">
+          <form
+            action={onSubmit}
+            className="flex flex-col gap-4"
+            aria-label="Trade cryptocurrency form"
+          >
             <div className="flex flex-col gap-2">
-              <Bold className="font-medium">Coin</Bold>
+              <label htmlFor="symbol" className="font-medium">
+                Coin
+              </label>
               <TextInput
                 placeholder="ETH"
                 required
                 maxLength={5}
                 id="symbol"
                 name="symbol"
+                aria-label="Cryptocurrency symbol"
+                aria-required="true"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Bold className="font-medium">Quantity</Bold>
+              <label htmlFor="quantity" className="font-medium">
+                Quantity
+              </label>
               <NumberInput
                 min={1}
                 max={1_000_000_000}
                 required
                 id="quantity"
                 name="quantity"
+                aria-label="Trade quantity"
+                aria-required="true"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Bold className="font-medium">Type</Bold>
+              <label htmlFor="type" className="font-medium">
+                Type
+              </label>
               <Select
                 id="type"
                 name="type"
                 defaultValue="BUY"
                 enableClear={false}
+                aria-label="Transaction type"
               >
                 <SelectItem value="BUY">BUY</SelectItem>
                 <SelectItem value="SELL">SELL</SelectItem>

@@ -13,11 +13,20 @@ export const MobileNav = () => {
   return (
     <div className="relative">
       <Menu>
-        <MenuButton className="flex items-center justify-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800 md:hidden">
+        <MenuButton
+          className="flex items-center justify-center rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800 md:hidden"
+          aria-label="Open navigation menu"
+        >
           {({ active }) => (
             <>
-              <XMarkIcon className={clsx(active ? 'block size-6' : 'hidden')} />
-              <Bars2Icon className={clsx(active ? 'hidden' : 'block size-6')} />
+              <XMarkIcon
+                className={clsx(active ? 'block size-6' : 'hidden')}
+                aria-hidden="true"
+              />
+              <Bars2Icon
+                className={clsx(active ? 'hidden' : 'block size-6')}
+                aria-hidden="true"
+              />
             </>
           )}
         </MenuButton>
@@ -28,19 +37,21 @@ export const MobileNav = () => {
         >
           {navLinks.map(({ label, href, icon }) => {
             const Icon = Icons[icon];
+            const isActive = path === href;
 
             return (
               <MenuItem key={label}>
                 <Link
                   href={href}
                   className={clsx(
-                    path === href
+                    isActive
                       ? 'bg-blue-100 text-gray-950 dark:bg-blue-950 dark:text-gray-50'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-800',
                     'flex w-full flex-row items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200'
                   )}
+                  aria-current={isActive ? 'page' : undefined}
                 >
-                  <Icon className="size-5" />
+                  <Icon className="size-5" aria-hidden="true" />
                   <span>{label}</span>
                 </Link>
               </MenuItem>

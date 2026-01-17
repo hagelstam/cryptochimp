@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow authenticated routes
+Disallow: /dashboard/
+Disallow: /login
+
+# Sitemap
+Sitemap: https://cryptochimp.vercel.app/sitemap.xml

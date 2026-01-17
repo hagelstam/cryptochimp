@@ -48,7 +48,7 @@ export const MarketTable = async ({ limit }: { limit: number }) => {
               <TableCell className="flex flex-row items-center gap-2">
                 {coin.metadata?.logo && (
                   <Image
-                    alt="logo"
+                    alt={`${coin.name} logo`}
                     height={24}
                     width={24}
                     src={coin.metadata.logo}
