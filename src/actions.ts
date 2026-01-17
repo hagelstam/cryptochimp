@@ -2,19 +2,11 @@
 
 import { createTransaction, getTradeDetails } from '@/lib/api';
 import { getCurrentUser } from '@/lib/auth';
+import { parseTradeFormData } from '@/lib/utils';
 import { TradeDetails } from '@/types';
 import { TransactionType } from '@/generated/client';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
-
-export const parseTradeFormData = (formData: FormData) => {
-  const symbol =
-    formData.get('symbol')?.toString().trim().toLocaleUpperCase() ?? '';
-  const quantity = Number(formData.get('quantity'));
-  const type = formData.get('type')?.toString() as TransactionType;
-
-  return { symbol, quantity, type };
-};
 
 export const trade = async (
   _prevState: unknown,

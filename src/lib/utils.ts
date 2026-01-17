@@ -1,4 +1,4 @@
-import { Transaction } from '@/generated/client';
+import { Transaction, TransactionType } from '@/generated/client';
 
 export const formatCurrency = (value: number) =>
   value.toLocaleString('fi-FI', {
@@ -50,4 +50,13 @@ export const getOwnedCoins = (transactions: Transaction[]) => {
   });
 
   return ownedCoins;
+};
+
+export const parseTradeFormData = (formData: FormData) => {
+  const symbol =
+    formData.get('symbol')?.toString().trim().toLocaleUpperCase() ?? '';
+  const quantity = Number(formData.get('quantity'));
+  const type = formData.get('type')?.toString() as TransactionType;
+
+  return { symbol, quantity, type };
 };
