@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { parseTradeFormData } from '../src/actions';
+import { parseTradeFormData } from '../src/lib/utils';
 
 describe('parseTradeFormData', () => {
   it('should parse valid form data correctly', () => {
