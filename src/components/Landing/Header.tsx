@@ -1,16 +1,17 @@
-import { SignInButton } from '@/components/SigninButton';
-import { UserMenu } from '@/components/UserMenu';
+import { HeaderUserSection } from '@/components/Landing/HeaderUserSection';
 import { getCurrentUser } from '@/lib/auth';
 import { cacheLife } from 'next/cache';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Header = () => {
+export const Header = async () => {
+  const user = await getCurrentUser();
+
   return (
     <header className="sticky top-0 z-40 w-full bg-white dark:bg-gray-950">
       <div className="container flex h-14 items-center">
         <HeaderLogo />
-        <HeaderUserSection />
+        <HeaderUserSection user={user} />
       </div>
     </header>
   );
@@ -36,18 +37,5 @@ const HeaderLogo = async () => {
         />
       </Link>
     </div>
-  );
-};
-
-const HeaderUserSection = async () => {
-  const user = await getCurrentUser();
-
-  return (
-    <nav
-      className="ml-auto flex items-center gap-4"
-      aria-label="Main navigation"
-    >
-      {user ? <UserMenu user={user} /> : <SignInButton size="sm" />}
-    </nav>
   );
 };

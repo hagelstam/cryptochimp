@@ -45,7 +45,7 @@ describe('Portfolio calculations', () => {
     });
 
     it('should handle decimal values', () => {
-      const result = calculatePercentageChange(10500.50, INITIAL_CAPITAL);
+      const result = calculatePercentageChange(10500.5, INITIAL_CAPITAL);
       expect(result).toBeCloseTo(5.005, 3);
     });
   });
@@ -132,7 +132,7 @@ describe('Portfolio calculations', () => {
     it('should handle decimal quantities and prices', () => {
       const coins = [
         { quantity: 0.5, currentPrice: 30000.99 },
-        { quantity: 1.25, currentPrice: 2000.50 },
+        { quantity: 1.25, currentPrice: 2000.5 },
       ];
 
       const portfolioValue = coins.reduce(
