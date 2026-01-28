@@ -1,4 +1,7 @@
-import { Footer, Header, LinkButton, StarBadge } from '@/components/Landing';
+import { Footer } from '@/components/Landing/Footer';
+import { Header, HeaderSkeleton } from '@/components/Landing/Header';
+import { LinkButton } from '@/components/Landing/LinkButton';
+import { StarBadge } from '@/components/Landing/StarBadge';
 import { cacheLife } from 'next/cache';
 import { Suspense } from 'react';
 
@@ -8,7 +11,9 @@ const GITHUB_PROFILE_LINK = 'https://github.com/hagelstam';
 export default function Landing() {
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-gray-950">
-      <Header />
+      <Suspense fallback={<HeaderSkeleton />}>
+        <Header />
+      </Suspense>
       <Hero />
       <Footer profileLink={GITHUB_PROFILE_LINK} repoLink={GITHUB_REPO_LINK} />
     </div>

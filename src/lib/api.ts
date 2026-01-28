@@ -4,9 +4,11 @@ import { prisma } from '@/lib/db';
 import { Coin, TradeDetails } from '@/types';
 import { Transaction, TransactionType } from '@/generated/client';
 import { cacheLife, cacheTag } from 'next/cache';
-import { cache } from 'react';
 
 export const getTopCoins = async (limit: number): Promise<Coin[]> => {
+  'use cache';
+  cacheLife('minutes');
+
   const data = await getLatest(limit);
   const symbols = data.map((coin) => coin.symbol);
   const metadata = await getMetadata(symbols);
@@ -211,9 +213,12 @@ export const getTradeDetails = async (
   return { balance, balanceAfter, pricePerCoin, total };
 };
 
-export const getStarCount = cache(async () => {
+export const getStarCount = async () => {
+  'use cache';
+  cacheLife('hours');
+
   const res = await fetch('https://api.github.com/repos/hagelstam/cryptochimp');
   if (!res.ok) throw new Error('Error getting star count');
   const data = (await res.json()) as { stargazers_count: number };
   return data.stargazers_count;
-});
+};
