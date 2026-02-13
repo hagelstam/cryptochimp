@@ -21,11 +21,13 @@ jobs:
         run: bun install
 
       - name: Lint
-        run: |
-          bun lint &
-          bun tsc &
-          bun fmt:check &
-          wait
+        run: bun lint
+
+      - name: Typecheck
+        run: bun tsc
+
+      - name: Format check
+        run: bun fmt:check
 
       - name: Test
         run: bun test
