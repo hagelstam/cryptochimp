@@ -1,10 +1,11 @@
-import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Suspense } from 'react';
 import './globals.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('https://cryptochimp.vercel.app'),
   title: {
     default: 'CryptoChimp - Cryptocurrency trading platform',
